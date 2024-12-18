@@ -1,0 +1,25 @@
+{% extends 'borrow/mobile.html' %}
+{% block title %} New Borrow Entry {% endblock %}
+
+{% block body %}
+
+<div class="ui segments"style="margin: 0; box-shadow: 2px 4px 8px #666;">
+	<div class="ui segment center inverted aligned block header">
+		<h3>NEW CLIENT ENTRY</h3>
+	</div>
+	<div class="ui segment" style="padding: 35px;">
+		<form method="POST" class="ui form">
+			
+			{% csrf_token %}
+			<div class="field">
+				<button type="submit" class="fluid ui blue button">SAVE CREDENTIAL</button>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('select').addClass('ui fluid search dropdown');
+	});
+</script>
+{% endblock %}

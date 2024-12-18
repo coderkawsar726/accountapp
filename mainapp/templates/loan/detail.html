@@ -1,0 +1,114 @@
+{% extends 'loan/mobile.html' %}
+{% load custom_tags %}
+{% block title %} Detail {% endblock %}
+
+{% block body %} 
+
+<div class="ui segments">
+	<div class="ui inverted segment center aligned black">
+		<h3>{{loan.client_name}}</h3>
+	</div>
+	<div class="ui segment">
+		<table class="ui unstackable table">
+			<tr>
+				<th>Reason</th>
+				<th>:</th>
+				<th>{{loan.remark}}
+				</th>
+			</tr>
+			<tr>
+				<th>Amount</th>
+				<th>:</th>
+				<th>{{loan.ammount}} - {{loan.currency}}</th>
+			</tr>
+			<tr>
+				<th>Returned</th>
+				<th>:</th>
+				<th>{% get_total_loan_return loan.id %} - {{loan.currency}}</th>
+			</tr>
+			<tr>
+				<th>Due Amount</th>
+				<th>:</th>
+				<th>{{ due }} - {{loan.currency}}
+				</th>
+			</tr>
+			<tr>
+				<th>Taken Date</th>
+				<th>:</th>
+				<th>{{loan.date}}
+				</th>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<h5 class="ui center aligned block header">RETURN ENTRY FORM</h5>
+					{% if due > 0 %}
+					<form method="POST" class="ui unstackable form">
+						<div class="field">
+							<div class="fields">
+								<div class="six wide field">
+								  <label>Amount</label>
+								  {{form.return_amount}}
+								</div>
+								<div class="ten wide field">
+								  <label>Remark</label>
+								  {{form.remark}}
+								</div>
+							</div>
+							{% if message %}
+							<span class="ui error message">Return amount cannot > Due</span>
+							{% endif %}
+							<div class="field" style="margin-top: 15px;">
+								{% csrf_token %}
+							  	<button type="submit" class="ui icon fluid blue button">
+							    SUBMIT
+							  </button>
+							</div>
+						</div>
+					</form>
+					{% else %}
+					<div class="ui message info">
+						<span>This client already returned all borrow amount.</span>
+						<a href="{% url 'main:complete_loan' client_id=loan.id %}" class="ui mini blue button"><i class="icon check"></i>Mark as Completed</a>
+					</div>
+					
+					{% endif %}
+				</td>
+			</tr>
+			
+			<tr>
+
+				<table class="ui unstackable table">
+					<h4 class="ui block header center aligned">Return History</h4>
+					<thead>
+					<tr>
+						<th>Amount</th>
+						<th>Date</th>
+						<th>Remark</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% if return_detail %}
+					{% for history in return_detail %}
+					<tr>
+						<td>{{history.return_amount}}</td>
+						<td>{{history.return_date}}</td>
+						<td>{{history.remark}}</td>
+					</tr>
+					{% endfor %}
+					{% else %}
+					</tbody>
+				</table>
+			</tr>
+			
+			
+			{% endif %}
+		</table>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('#id_return_amount').attr('max',{{due}});
+	});
+</script>
+{% endblock %}
+

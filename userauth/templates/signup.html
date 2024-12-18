@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Sign Up{% endblock %}
+
+{% block body %} 
+
+<div class="p-6">
+	<img src="{% static 'img/user-icon.png' %}" class="rounded-full w-32 m-auto mb-4">
+	<div class="text-2xl text-sky-800 text-center font-semibold mb-4">MY PERSONAL FINANCE</div>
+	<div class="border rounded-lg shadow-lg bg-slate-100 ring-1 ring-slate-100">
+		<h1 class="text-center text-2xl text-white font-semibold bg-cyan-600 rounded-t-lg py-3">NEW USER SIGNUP</h1>
+		<div class="py-4 px-6 text-slate-600">
+			<form method="POST">
+				<!-- <div class="mb-3">
+					<label>Firstname</label>
+					{{form.first_name}}
+				</div>
+				<div class="mb-3">
+					<label>Password</label>
+					<input type="password" name="password" class="form-input w-full">
+				</div> -->
+
+				{{form}}
+				<div class="mb-3">
+					{% csrf_token %}
+					<input type="submit" name="submit" class="w-full bg-cyan-500 ring-1 ring-cyan-600 text-white rounded-sm py-2" value="Sign up">
+					
+				</div>
+				<div class="pb-4">
+					<span>Already have an account? <a href="{% url 'auth:login' %}" class="font-semibold text-sky-600">Login</a> </span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('input').addClass('w-full mb-3 ring-1 ring-sky-600');
+		$('#id_password').attr('type','password');
+	});
+</script>
+{% endblock %}
+

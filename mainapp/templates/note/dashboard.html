@@ -1,0 +1,28 @@
+{% extends 'note/mobile.html' %}
+{% block title %} NOTES DASHBOARD {% endblock %}
+
+{% block body %} 
+<div class="ui segments">
+	<div class="ui secondary segment center aligned">
+		<h2>MY NOTES</h2>
+	</div>
+	<div class="ui segment">
+		{% if notes %}
+		{% for note in notes %}
+		<div class="ui divided list">
+			<a href="{% url 'main:read_note' pk=note.pk %}" class="item" style="background: #0EA5E9; padding: 8px 10px; color: #fff; font-weight: bolder; border-radius: 8px;">
+				<i class="file alternate outline icon"></i> {{note.title}}
+			</a>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="ui red message">
+			Notes not found at this moment. This is cause of you didn't write any blog still now..<br><br>
+			To write a new note <br><a href="{% url 'main:add_note' %}" class="ui blue label">Click here</a>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+
+{% endblock %}

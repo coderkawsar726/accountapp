@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Form {% endblock %}
+{% block body %} 
+
+<div class="w-2/6 m-auto my-8 border p-4">
+	<h1 class="text-center">Form Test</h1>
+	<form method="POST">
+		<div class="form">
+			{{form}}
+			{% csrf_token %}
+			<button type="Submit" class="bg-sky-500 px-4 py-2 text-white hover:bg-sky-600">Submit</button>
+		</div>
+	</form>
+</div>
+<script>
+$(document).ready(function(){
+	$('input').addClass('w-full focus:border-gray-500');
+	$('select').addClass('w-full focus:border-gray-500');
+	$('textarea').addClass('w-full focus:border-gray-500');
+});
+</script>
+{% endblock %}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Borrow Management {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+        .ui.vertical.menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .ui.vertical.menu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ui">
+        <!-- Hamburger Icon -->
+        <div class="ui huge inverted purple secondary pointing menu">
+
+            <div class="header centered item">
+                <a onclick="history.back()"><i class="icon chevron large left"></i></a>
+                <span style="margin-left:50px;">Borrow Management</span>
+            </div>
+            <a class="item right floated" id="hamburger-menu">
+                <i class="bars icon large"></i>
+            </a>
+            
+        </div>
+
+        <!-- Vertical Menu (Mobile) -->
+        <div class="ui right floated inverted purple vertical menu" id="mobile-menu" style="z-index: 100;  position: absolute; right: 25px; top: 60px;">
+            <a href="{% url 'main:menu' %}"class="item">Index Menu</a>
+            <a href="{% url 'main:borrow_index' %}"class="item">Dashboard</a>
+            <a href="{% url 'main:add_borrow' %}" class="item">Add New</a>
+
+            <!-- Submenu -->
+            <div class="item">
+                Services
+                <div class="menu">
+                    <a href="{% url 'main:add_client' %}" class="item">Add New Client</a>
+                    <a href="{% url 'main:borrow_complete_dashboard' %}" class="item">Completed Clients</a>
+                </div>
+            </div>
+
+            <a href="{% url 'auth:logout' %}" class="item">Logout</a>
+        </div>
+    </div>
+
+    <div class="ui container">
+    	{% block body %}
+    	{% endblock %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const menu = $('#mobile-menu');
+            menu.hide(); // Initially hide the menu
+
+            // Toggle menu on hamburger click
+            $('#hamburger-menu').on('click', function () {
+                menu.toggle();
+            });
+
+
+            $('select, .dropdown').dropdown();
+            $('.ui.checkbox').checkbox();
+
+        });
+    </script>
+</body>
+</html>

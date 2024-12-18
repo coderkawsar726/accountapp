@@ -1,0 +1,99 @@
+{% extends 'borrow/mobile.html' %}
+{% block title %} Detail {% endblock %}
+
+{% block body %} 
+
+<div class="ui segments">
+	<div class="ui inverted segment center aligned black">
+		<h3>{{borrow.client_name}}</h3>
+	</div>
+	<div class="ui segment">
+		<table class="ui unstackable table">
+			<tr>
+				<th>Reason</th>
+				<th>:</th>
+				<th>{{borrow.remark}}
+				</th>
+			</tr>
+			<tr>
+				<th>Amount</th>
+				<th>:</th>
+				<th>{{borrow.ammount}} - {{borrow.currency}}</th>
+			</tr>
+			<tr>
+				<th>Due Amount</th>
+				<th>:</th>
+				<th>{{ due }} - {{borrow.currency}}
+				</th>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<h5 class="ui center aligned block header">RETURN ENTRY FORM</h5>
+					{% if due > 0 %}
+					<form method="POST" class="ui unstackable form">
+						<div class="field">
+							<div class="fields">
+								<div class="six wide field">
+								  <label>Amount</label>
+								  {{form.return_amount}}
+								</div>
+								<div class="ten wide field">
+								  <label>Remark</label>
+								  {{form.remark}}
+								</div>
+							</div>
+							<div class="field" style="margin-top: 15px;">
+								{% csrf_token %}
+							  	<button type="submit" class="ui icon fluid blue button">
+							    SUBMIT
+							  </button>
+							</div>
+						</div>
+					</form>
+					{% else %}
+					<div class="ui message info">
+						<span>This client already returned all borrow amount.</span>
+						<a href="{% url 'main:complete_borrow' client_id=borrow.id %}" class="ui mini blue button"><i class="icon check"></i>Mark as Completed</a>
+					</div>
+					
+					{% endif %}
+				</td>
+			</tr>
+			
+			<tr>
+
+				<table class="ui unstackable table">
+					<h4 class="ui block header center aligned">Return History</h4>
+					<thead>
+					<tr>
+						<th>Amount</th>
+						<th>Date</th>
+						<th>Remark</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% if return_detail %}
+					{% for history in return_detail %}
+					<tr>
+						<td>{{history.return_amount}}</td>
+						<td>{{history.return_date}}</td>
+						<td>{{history.remark}}</td>
+					</tr>
+					{% endfor %}
+					{% else %}
+					</tbody>
+				</table>
+			</tr>
+			
+			
+			{% endif %}
+		</table>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+
+});
+</script>
+
+{% endblock %}

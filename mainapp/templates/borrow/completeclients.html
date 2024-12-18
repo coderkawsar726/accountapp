@@ -1,0 +1,49 @@
+{% extends 'borrow/mobile.html' %}
+{% load custom_tags %}
+{% block title %} Complete Client Dashboard {% endblock %}
+
+{% block body %} 
+<div class="ui segments">
+	<div class="ui secondary segment center aligned">
+		<h2>COMPLETE CLIENTS</h2>
+	</div>
+	<div class="ui segment">
+		{% if borrows %}
+		{% for borrow in borrows %}
+		<table class="ui unstackable padded compact celled table" style="margin: 15px 0px; border: 1px solid #666;">
+			<thead class="ui inverted violet segment">
+				<tr>
+					<td colspan="2"><strong>{{borrow.client_name}}
+					<span style="color: #FACC15 !important;">[ {{borrow.remark}} ]</span> </strong>
+						<a href="{% url 'main:detail_complete_borrow' pk=borrow.id %}" class="ui right floated button lin-button mini violet">View <i class="icon chevron right"></i></a>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Amount</td>
+					<td>{{borrow.ammount}} {{borrow.currency}}</td>
+				</tr>
+				<tr>
+					<td>Return</td>
+					<td>{% get_total_borrow_return borrow.id %} {{borrow.currency}}
+					</td>
+				</tr>
+				<tr>
+					<td>Due</td>
+					<td>{% get_borrow_due borrow.id %} {{borrow.currency}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		{% endfor %}
+		{% else %}
+		<div class="ui red messages">
+			No data found
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+
+{% endblock %}

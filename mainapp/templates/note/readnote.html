@@ -1,0 +1,21 @@
+{% extends 'note/mobile.html' %}
+{% block title %} NOTES DASHBOARD {% endblock %}
+
+{% block body %} 
+<div class="ui segments">
+	<div class="ui inverted violet segment center aligned">
+		<h4>{{mynote.title}}</h4>
+	</div>
+	<div>
+		<div class="ui raised segment" style="padding: 10px 20px;">
+			{{mynote.note|linebreaks}}
+		</div>
+	</div>
+	<div class="ui segment inverted"  style="padding: 7px 20px;">
+		<a href="{% url 'main:update_note' pk=mynote.pk %}" class="ui mini teal button"><i class="edit icon"></i>Update note</a>
+		<a href="{% url 'main:delete_note' pk=mynote.pk %}" class="ui mini red button"><i class="trash icon"></i>Delete note</a>
+	</div>
+</div>
+
+
+{% endblock %}

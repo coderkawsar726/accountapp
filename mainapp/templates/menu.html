@@ -1,0 +1,83 @@
+{% extends 'mainbase.html' %}
+{% load static %}
+{% block title %} Dashboard {% endblock %}
+{% block body %}
+<div class=" h-full">
+	<!-- <a href="" class="bg-sky-600 px-4 py-3 mr-4 text-white font-semibold float-right rounded-xl">Logout</a> -->
+<!-- <img src="{% static 'img/finance-banner.png' %}" class="w-full"> -->
+<div class="w-32 py-4 m-auto">
+	<img src="{% static 'img/user-icon.png' %}" class="rounded-full">
+</div>
+<div class="px-6 pb-4">
+	<a href="{% url 'main:dashboard' %}" class="">
+		<div class="bg-gradient-to-r from-cyan-500 to-cyan-500 w-full  clear-both text-center py-3 rounded-xl text-white font-bold ring ring-cyan-700 my-4">
+			<img src="{% static 'img/data-analysis.png' %}" class="w-14 m-auto">
+			<span class="text-right">ACCOUNT DASHBOARD</span>
+		</div>
+	</a>
+	<div id="LoanButton" class="relative">
+		<div class="bg-gradient-to-r from-cyan-500 to-cyan-500 w-full  clear-both text-center py-3 rounded-xl text-white font-bold ring ring-cyan-700 my-4">
+			<img src="{% static 'img/loan.png' %}" class="w-14 m-auto">
+			<span class="text-right">LOAN MANAGEMENT</span>
+		</div>
+
+		<!-- Hidden Menu -->
+		<div class="bg-white text-white w-full p-4 relative shadow-xl mt-0 ml-0 hidden" id="hiddenMenu">
+			<a class="bg-gradient-to-r from-cyan-500 to-cyan-500 font-bold p-4 mb-3 w-full block shadow-lg" id="hiddenSubMenu" href="{% url 'main:borrow_index' %}">
+				BORROW MANAGEMENT <span class="float-end"><i class="fa-solid fa-chevron-right"></i></span>
+			</a>
+			<a class="bg-gradient-to-r from-cyan-500 to-cyan-500 font-bold p-4 w-full block" id="hiddenSubMenu" href="{% url 'main:loan_index' %}">
+				MY LOAN MANAGEMENT <span class="float-end"><i class="fa-solid fa-chevron-right"></i></span>
+			</a>
+		</div>
+		<!-- Hidden Menu End -->
+
+	</div>
+	<a href="">
+		<div class="bg-gradient-to-r from-cyan-500 to-cyan-500 w-full  clear-both text-center py-3 rounded-xl text-white font-bold ring ring-cyan-700 my-4">
+			<img src="{% static 'img/user-experience.png' %}" class="w-14 m-auto">
+			<span class="text-right">SALARY MANAGEMENT</span>
+		</div>
+	</a>
+	<a href="{% url 'main:note_dashboard' %}">
+		<div class="bg-gradient-to-r from-cyan-500 to-cyan-500 w-full  clear-both text-center py-3 rounded-xl text-white font-bold ring ring-cyan-700 my-4 shadow-xl">
+			<img src="{% static 'img/notepad.png' %}" class="w-14 m-auto">
+			<span class="text-right">MY NOTES</span>
+		</div>
+	</a>
+	<hr>
+
+	<div class="grid grid-cols-3 gap-3 text-center text-xl">
+		<div class="border-b-2 border-sky-400 py-1 hover:border-sky-800 hover:border-b-2">
+			<a href="" class=" text-cyan-100 font-semibold">
+			<i class="fa-solid fa-user text-3xl"></i>
+			<br>PROFILE
+			</a>
+		</div>
+
+		<div class="border-b-2 border-sky-400 py-1 hover:border-sky-800 hover:border-b-2">
+			<a href="" class=" text-cyan-100 font-semibold">
+			<i class="fa-solid fa-gear text-3xl"></i>
+			<br>SETTING
+			</a>
+		</div>
+
+		<div class="border-b-2 border-sky-400 py-1 hover:border-sky-800 hover:border-b-2">
+			<a href="{% url 'auth:logout' %}" class=" text-cyan-100 font-semibold">
+			<i class="fa-solid fa-right-from-bracket text-3xl"></i>
+			<br>LOGOUT
+			</a>
+		</div>
+
+	</div>
+</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$('#LoanButton').click(function(){
+			$('#hiddenMenu').fadeToggle();
+		});
+	});
+</script>
+{% endblock %}

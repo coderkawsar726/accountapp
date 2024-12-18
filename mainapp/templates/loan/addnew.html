@@ -1,0 +1,42 @@
+{% extends 'loan/mobile.html' %}
+{% block title %} New Loan Entry {% endblock %}
+
+{% block body %}
+
+<div class="ui segments"style="margin: 35px; box-shadow: 2px 4px 8px #666;">
+	<div class="ui segment center inverted aligned block header">
+		<h3>NEW LOAN ENTRY</h3>
+	</div>
+	<div class="ui segment" style="padding: 35px;">
+		<form method="POST" class="ui form">
+			<div class="field">
+				<label>Client Name:</label>
+				{{form.client_name}}
+			</div>
+			<div class="two wide fields">
+				<div class="field">
+					<label>Amount:</label>
+					{{form.ammount}}
+				</div>
+				<div class="field">
+					<label>Currency:</label>
+					{{form.currency}}
+				</div>
+				<div class="field">
+					<label>Annotation:</label>
+					{{form.remark}}
+				</div>
+				{% csrf_token %}
+				<div class="field">
+					<button type="submit" class="fluid ui blue button">SAVE CREDENTIAL</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('select').addClass('ui fluid search dropdown');
+	});
+</script>
+{% endblock %}

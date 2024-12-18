@@ -1,0 +1,27 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  <!-- jQuery 3.7.1 (Latest Stable Version) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <title>ACCOUNT APP</title>
+</head>
+<body style="background-image: url('{% static 'img/background-1.jpg' %}'); background-position: cover; background-repeat: none; background-attachment: fixed;">
+	<div class="h-screen content-center justify-center">
+    <h1 class="text-center font-bold text-4xl text-sky-700 px-4">WELCOME <br>
+      TO PERSONAL FINANCE
+    </h1>
+    <div class="bg-teal-600 w-14 m-auto h-0.5"></div>
+    <p class="mx-4 text-teal-800 px-4 text-center">This is a personal finance management application Build for your daily financial activities</p>
+    <div class="mx-8 text-center space-y-2 py-4">
+      <a href="{% url 'auth:login' %}" class="w-60 block m-auto text-center bg-sky-600 py-3 font-semibold text-white rounded-full">Log In</a>
+      <a href="{% url 'auth:signup' %}"  class="w-60 block m-auto text-center bg-sky-600 py-3  font-semibold text-white rounded-full">Registration</a>
+    </div>
+	</div>
+</body>
+</html>

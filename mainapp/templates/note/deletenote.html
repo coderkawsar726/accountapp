@@ -1,0 +1,22 @@
+{% extends 'note/mobile.html' %}
+{% block title %} NOTES DASHBOARD {% endblock %}
+
+{% block body %} 
+<div class="ui segments" style="width: 80%; margin: auto;">
+	<div class="ui inverted segment">
+		<h5><i class="trash alternate outline icon"></i> Note delete confirmation</h5>
+	</div>
+	<div class="ui segment">
+		<h5 class="ui red header">Are you sure you want to delete this note?</h5>
+		Remember that you cannot able to recover a note after deleting. 
+	</div>
+	<div class="ui segment">
+		<form method="POST">
+			{% csrf_token %}
+			<button type="submit" class="ui red mini button"><i class="trash alternate outline icon"></i> Delete</button>
+			<button class="ui secondary mini button"><i class="close icon"></i> Cancel</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

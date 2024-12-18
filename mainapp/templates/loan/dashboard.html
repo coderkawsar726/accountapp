@@ -1,0 +1,49 @@
+{% extends 'loan/mobile.html' %}
+{% load custom_tags %}
+{% block title %} LOAN DASHBOARD {% endblock %}
+
+{% block body %} 
+<div class="ui segments">
+	<div class="ui secondary segment center aligned">
+		<h2>Dashboard</h2>
+	</div>
+	<div class="ui segment">
+		{% if loans %}
+		{% for loan in loans %}
+		<table class="ui unstackable padded compact celled table" style="margin: 15px 0px; border: 1px solid #666;">
+			<thead class="ui inverted violet segment">
+				<tr>
+					<td colspan="2"><strong>{{loan.client_name}}
+					<span style="color: #FACC15 !important;">[ {{loan.remark}} ]</span> </strong>
+						<a href="{% url 'main:detail_loan' pk=loan.id %}" class="ui right floated button lin-button mini violet">View <i class="icon chevron right"></i></a>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Amount</td>
+					<td>{{loan.ammount}} {{loan.currency}}</td>
+				</tr>
+				<tr>
+					<td>Return</td>
+					<td>{% get_total_loan_return loan.id %} {{loan.currency}}
+					</td>
+				</tr>
+				<tr>
+					<td>Due</td>
+					<td>{% get_loan_due loan.id %} {{loan.currency}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		{% endfor %}
+		{% else %}
+		<div class="ui red messages">
+			No data found
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+
+{% endblock %}

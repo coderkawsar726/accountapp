@@ -1,0 +1,35 @@
+{% extends 'borrow/mobile.html' %}
+{% load tz %}
+
+{% block title %} Complication Reqeust{% endblock %}
+
+{% block body %} 
+<div class="ui segments py-6">
+	<div class="ui segment inverted black block header">
+		<h5>Request for complete credential</h5>
+	</div>
+	<div class="ui segment">
+		<p>
+			I hereby decleared that, <strong style="color: green; font-style: italic;">{{client.client_name}} </strong>has proudly returned his all due borrow amount in date- {% now "Y-m-d" %}. From today on, I have no claim on him. <br> 
+		</p>
+		<form method="POST" class="ui form">
+				
+	</div>
+	<div class="ui segment header block">
+				<div class="field">
+					{% csrf_token %}
+					{{form}}
+					<input type="submit" class="ui purple tiny button" value="Complete" id="submit">
+					<button class="ui tiny secondary button">Cancel</button>
+				</div>
+				
+			</form>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$('#id_is_complete').text("I am agree to complete");
+	});
+</script>
+{% endblock %}
